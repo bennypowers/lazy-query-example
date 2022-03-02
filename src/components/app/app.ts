@@ -45,22 +45,20 @@ export class AppPage extends LitElement {
 
   router = new ReactiveVarController(this, locationVar);
 
+  pretty = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' })
+
+  setLaunchId = () => this.launchId = this.router.value.pathname.split('/').pop() || null;
+
   connectedCallback(): void {
     super.connectedCallback();
     this.router.addEventListener('change', this.setLaunchId);
     this.setLaunchId();
   }
 
-  updated(changed: PropertyValues<this>) {
-    if (changed.has('launchId'))
-      this.query.subscribe({ variables: { launchId: this.launchId } });
+  updated() {
+    if (this.launchId && this.query.variables?.launchId !== this.launchId)
+      this.query.variables = { launchId: this.launchId };
   }
-
-  setLaunchId = () => {
-    this.launchId = this.router.value.pathname.split('/').pop() || null;
-  }
-
-  pretty = new Intl.DateTimeFormat('en-US', { dateStyle: 'long' })
 
   render() {
     const launch = this.query.data?.launch;

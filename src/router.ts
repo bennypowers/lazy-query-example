@@ -35,6 +35,7 @@ export class ReactiveVarController<T> extends EventTarget implements ReactiveCon
   #onNextChange = (val: T) => {
     this.value = val;
     this.dispatchEvent(new ChangeEvent(val));
+    this.host.requestUpdate();
     this.variable.onNextChange(this.#onNextChange);
   }
 
