@@ -1,0 +1,18 @@
+[hidden] {
+  display: none !important;
+}
+
+
+@media(prefers-color-scheme: dark) {
+  a {
+    color: cornflowerblue;
+  }
+
+  a:visited {
+    color: lightpink;
+  }
+  
+  a:hover {
+    color: cornfloweryellow;
+  }
+}

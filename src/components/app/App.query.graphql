@@ -1,0 +1,21 @@
+query AppQuery {
+  location @client { pathname }
+  launches {
+    id
+    mission_name
+  }
+}
+
+query LaunchQuery($launchId: ID!) {
+  launch(id: $launchId) {
+    mission_name
+    launch_date_utc
+    details
+    links {
+      article_link
+    }
+    rocket {
+      rocket_name
+    }
+  }
+}
